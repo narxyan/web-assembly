@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wasm Stats App</title>
+</head>
+
+<body>
+    <h1>WebAssembly Statistical App</h1>
+
+    <!-- File upload -->
+    <label for="fileInput">Upload CSV File:</label>
+    <input type="file" id="fileInput" accept=".csv"><br><br>
+
+    <!-- Dropdown for operation selection -->
+    <label for="operation">Select Operation:</label>
+    <select id="operation">
+        <option value="mean">Calculate Mean</option>
+        <option value="variance">Calculate Variance</option>
+    </select><br><br>
+
+    <!-- Execute button -->
+    <button id="executeButton" disabled>Run Operation</button>
+
+    <!-- Placeholder for results -->
+    <h2>Result: <span id="result">None</span></h2>
+
+    <!-- Include the Emscripten-generated JavaScript glue code -->
+    <script src="stats.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
