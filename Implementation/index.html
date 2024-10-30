@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wasm Stats App</title>
+    <title>WebAssembly Statistical App</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 </head>
 
 <body>
@@ -14,20 +15,37 @@
     <label for="fileInput">Upload CSV File:</label>
     <input type="file" id="fileInput" accept=".csv"><br><br>
 
-    <!-- Dropdown for operation selection -->
+    <!-- Dropdown for selecting an operation -->
     <label for="operation">Select Operation:</label>
     <select id="operation">
         <option value="mean">Calculate Mean</option>
         <option value="variance">Calculate Variance</option>
+        <option value="t-test">T-Test</option>
+        <option value="anova">ANOVA</option>
     </select><br><br>
+
+    <!-- Dropdown for selecting a column for mean/variance -->
+    <label for="columnSelect">Select Column for Mean/Variance:</label>
+    <select id="columnSelect" disabled></select><br><br>
+
+    <!-- Dropdown for selecting two columns for t-test -->
+    <div id="groupSelection" style="display:none;">
+        <label for="group1Select">Select Group 1:</label>
+        <select id="group1Select" disabled></select>
+
+        <label for="group2Select">Select Group 2:</label>
+        <select id="group2Select" disabled></select><br><br>
+    </div>
 
     <!-- Execute button -->
     <button id="executeButton" disabled>Run Operation</button>
 
-    <!-- Placeholder for results -->
+    <!-- Placeholder for result -->
     <h2>Result: <span id="result">None</span></h2>
 
-    <!-- Include the Emscripten-generated JavaScript glue code -->
+    <!-- ECharts Container -->
+    <div id="chart" style="width: 600px; height: 400px;"></div>
+
     <script src="stats.js"></script>
     <script src="script.js"></script>
 </body>

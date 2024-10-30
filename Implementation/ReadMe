@@ -4,5 +4,7 @@
 ### get file upload fun to upload csv file
 ### consume data from csv
 ### write code for sampling, re-sampling, t-test, anovo-test
+### add timer
 ### test with data
+### integrate echarts
 ### make UI better (not priority)
