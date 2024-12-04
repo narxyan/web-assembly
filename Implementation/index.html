@@ -6,45 +6,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebAssembly Statistical App</title>
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/extension/dataTool.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #555;
+        }
+
+        select,
+        input[type="file"],
+        button {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        button:hover:enabled {
+            background-color: #0056b3;
+        }
+
+        #result {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        #chart {
+            margin-top: 20px;
+            width: 100%;
+            height: 400px;
+        }
+
+        .group-selection {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>WebAssembly Statistical App</h1>
+    <div class="container">
+        <h1>WebAssembly Statistical App</h1>
 
-    <!-- File upload -->
-    <label for="fileInput">Upload CSV File:</label>
-    <input type="file" id="fileInput" accept=".csv"><br><br>
+        <!-- File upload -->
+        <label for="fileInput">Upload CSV File:</label>
+        <input type="file" id="fileInput" accept=".csv">
 
-    <!-- Dropdown for selecting an operation -->
-    <label for="operation">Select Operation:</label>
-    <select id="operation">
-        <option value="mean">Calculate Mean</option>
-        <option value="variance">Calculate Variance</option>
-        <option value="t-test">T-Test</option>
-        <option value="anova">ANOVA</option>
-    </select><br><br>
+        <!-- Dropdown for selecting an operation -->
+        <label for="operation">Select Operation:</label>
+        <select id="operation">
+            <option value="t-test">T-Test</option>
+            <option value="anova">ANOVA</option>
+        </select>
 
-    <!-- Dropdown for selecting a column for mean/variance -->
-    <label for="columnSelect">Select Column for Mean/Variance:</label>
-    <select id="columnSelect" disabled></select><br><br>
+        <!-- Dropdown for selecting two columns for t-test -->
+        <div id="groupSelection" class="group-selection">
+            <div>
+                <label for="group1Select">Select Group 1:</label>
+                <select id="group1Select"></select>
+            </div>
+            <div>
+                <label for="group2Select">Select Group 2:</label>
+                <select id="group2Select"></select>
+            </div>
+        </div>
 
-    <!-- Dropdown for selecting two columns for t-test -->
-    <div id="groupSelection" style="display:none;">
-        <label for="group1Select">Select Group 1:</label>
-        <select id="group1Select" disabled></select>
+        <!-- Execute button -->
+        <button id="executeButton">Run Operation</button>
 
-        <label for="group2Select">Select Group 2:</label>
-        <select id="group2Select" disabled></select><br><br>
+        <!-- Placeholder for result -->
+        <h2>Result: <span id="result">None</span></h2>
+
+        <!-- ECharts Container -->
+        <div id="chart"></div>
     </div>
-
-    <!-- Execute button -->
-    <button id="executeButton" disabled>Run Operation</button>
-
-    <!-- Placeholder for result -->
-    <h2>Result: <span id="result">None</span></h2>
-
-    <!-- ECharts Container -->
-    <div id="chart" style="width: 600px; height: 400px;"></div>
 
     <script src="stats.js"></script>
     <script src="script.js"></script>
